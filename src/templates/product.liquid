@@ -1,0 +1,58 @@
+
+<div id="option-buttons">
+  <button type="button" name="getSizes">Size<span class="option-button-selected" id="size-button-span">Select a Size</span></button>
+  <button type="button" name="getFrames">Frame Style<span class="option-button-selected" id="frame-button-span">Select a Frame</span></button>
+  <button type="button" name="getMattes">Matte Style<span class="option-button-selected" id="matte-button-span">Select a Matte</span></button>
+</div>
+
+{% section 'product' %}
+
+
+
+{%comment%}
+<div class="grid">
+    {% for option in product.options_with_values %}
+{% for value in option.values %}
+  <div class="grid__item medium-up--one-half">
+<div class="option"><a class="size-option" data-option="{{value}}">{{value}}</a></div>
+</div>
+{% endfor %}
+{% endfor %}
+
+</div>
+
+<div class="grid">
+
+<div class="grid__item medium-up--one-half">
+  {% for product in collections.frames.products %}
+  {% for variant in product.variants %}
+
+  <div class="grid__item medium-up--one-quarter small--one-quarter">
+    <img class="frame-option option" data-option="{{variant.id}}" src="{{ product.featured_image | img_url: '200x200' }}" alt="{{ variant.featured_image.alt | escape }}">
+  </div>
+  {% endfor %}
+  {% endfor %}
+</div>
+
+<div class="grid__item medium-up--one-half">
+  {% for product in collections.mattes.products %}
+  {% for variant in product.variants %}
+
+  <div class="grid__item medium-up--one-quarter small--one-quarter">
+
+    <img class="matte-option option" data-option="{{variant.id}}" src="{{ product.featured_image | img_url: '200x200' }}" alt="{{ variant.featured_image.alt | escape }}">
+  </div>
+  {% endfor %}
+  {% endfor %}
+</div>
+
+
+
+
+
+{%endcomment%}
+
+{% include 'framer' %}
+
+
+</div>

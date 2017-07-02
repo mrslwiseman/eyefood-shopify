@@ -1,0 +1,10 @@
+development:
+    store: eyefood-dev1.myshopify.com
+    password: a14b510ed8688ae3e97f8da4677ffb6a
+    theme_id: "live"
+    bucket_size: 40
+    refill_rate: 2
+    ignore_files:
+      - "*.swp"
+      - "*~"
+      - "config/settings_data.json"

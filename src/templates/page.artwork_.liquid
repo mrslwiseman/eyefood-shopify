@@ -1,0 +1,39 @@
+<script type="text/javascript">
+  console.dir({{collections["landscape"] | json}})
+  //<a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: title }}">
+</script>
+
+<div class="grid">
+
+    <div class="collection-thumb grid__item medium-up--one-third">
+      <h2>{{collections["macro"].title}}</h2>
+        <a href="{{collections['macro'].url}}">
+
+        <div class="overlay"></div>
+        <img src="{{ collections['macro'].image.src | img_url: '400x602', crop: 'center' }}" alt="">
+      </a>
+  </div>
+
+    <div class="collection-thumb grid__item medium-up--one-third">
+      <a href="{{collections['landscape'].url}}">
+        <h2>{{collections["landscape"].title}}</h2>
+        <div class="overlay"></div>
+        <img src="{{ collections['landscape'].image.src | img_url: '400x602', crop: 'center' }}" alt="">
+      </a>
+  </div>
+
+    <div class="collection-thumb grid__item medium-up--one-third">
+      <a href="{{collections['water'].url}}">
+        <h2>{{collections["water"].title}}</h2>
+        <div class="overlay"></div>
+        <img src="{{ collections['water'].image.src | img_url: '400x602', crop: 'center' }}" alt="">
+      </a>
+  </div>
+
+
+</div>
+
+<div class="section-divider"></div>
+
+
+{% section 'featured-collection' %}

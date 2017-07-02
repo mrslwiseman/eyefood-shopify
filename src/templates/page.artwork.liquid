@@ -1,0 +1,60 @@
+<script type="text/javascript">
+  console.dir({{collections["landscape"] | json}})
+  //<a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: title }}">
+</script>
+
+<div class="grid">
+
+
+
+    <div class="collection-thumb grid__item medium-up--one-third">
+      <div class="collection-thumb-layer-container">
+        <a href="{{collections['macro'].url}}" class="div1 collection-thumb-layer">
+            <h2>{{collections["macro"].title}}</h2>
+        </a>
+        <div class="div2 collection-thumb-layer"></div>
+        <div class="div3 collection-thumb-layer">
+            <img src="{{ collections['macro'].image.src | img_url: '400x602', crop: 'center' }}" alt="">
+        </div>
+      </div>
+  </div>
+
+    <div class="collection-thumb grid__item medium-up--one-third">
+      <div class="collection-thumb-layer-container">
+        <a href="{{collections['landscape'].url}}" class="div1 collection-thumb-layer">
+            <h2>{{collections["landscape"].title}}</h2>
+        </a>
+        <div class="div2 collection-thumb-layer"></div>
+
+        <div class="div3 collection-thumb-layer">
+            <img src="{{ collections['landscape'].image.src | img_url: '400x602', crop: 'center' }}" alt="">
+        </div>
+      </div>
+  </div>
+
+    <div class="collection-thumb grid__item medium-up--one-third">
+      <div class="collection-thumb-layer-container">
+        <a href="{{collections['water'].url}}" class="div1 collection-thumb-layer">
+            <h2>{{collections["water"].title}}</h2>
+        </a>
+        <div class="div2 collection-thumb-layer"></div>
+        <div class="div3 collection-thumb-layer">
+            <img src="{{ collections['water'].image.src | img_url: '400x602', crop: 'center' }}" alt="">
+        </div>
+      </div>
+  </div>
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="section-divider"></div>
+
+
+{% section 'featured-collection' %}

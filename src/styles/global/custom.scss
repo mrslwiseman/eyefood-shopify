@@ -1,0 +1,161 @@
+/* reset styles*/
+
+main {
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+
+
+/* ==================================================*/
+/* BASE STYLES */
+/* ==================================================*/
+.center {
+  text-align: center;
+}
+
+.hidden {
+  display:none;
+}
+
+
+/* ==================================================*/
+/* LAYOUT  */
+/* ==================================================*/
+@include media-query($medium-up) {
+
+  main {
+      width:90%;
+      max-width: 1200px;
+
+  }
+#shopify-section-header {
+  padding:15px 0;
+}
+
+.section-divider {
+  padding:3em 0;
+}
+
+
+}
+
+
+
+
+/* ==================================================*/
+/* typography*/
+/* ==================================================*/
+
+
+
+
+a,
+p {
+  color: $color-0;
+  font-family: $font-stack-header;
+}
+
+.body-text p {
+  font-family: $font-stack-body;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6
+ {
+  font-family: $font-stack-header; /* roboto condensed*/
+  color: $color-1;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+
+
+
+
+/* ==================================================*/
+/* HEADER  */
+/* ==================================================*/
+
+.site-logo img {
+  margin: 0 auto;
+}
+
+
+
+
+
+
+
+
+/* ==================================================*/
+/* ARTWORK COLLECTION THUMBNAILS*/
+/* ==================================================*/
+.collection-thumb {
+  position:relative;
+  overflow: hidden;
+}
+
+.collection-thumb-layer-container {
+    position:relative;
+    height:480px;
+}
+
+.collection-thumb-layer {
+height: 100%;
+width: 100%;
+position: absolute;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.collection-thumb-layer h2{
+    text-shadow: #222222 0 2px 8px;
+}
+
+.div1 {
+  z-index:2;
+}
+.div2 {
+  z-index:1;
+  background-color:rgba(0,0,0,.3);
+}
+.div3 {
+  z-index:0;
+}
+
+
+
+
+
+
+
+
+
+
+.social-sharing {
+  padding: 2em 0;
+}
+
+.social-sharing a {
+  padding: 0 1em;
+}
+
+
+footer {
+  padding: 3em 0;
+}

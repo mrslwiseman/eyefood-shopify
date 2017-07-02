@@ -1,0 +1,249 @@
+<script>
+
+
+
+
+
+let framer = {};
+
+framer.frameElements = '<div class="frame frame-top"></div><div class="frame frame-x frame-left"></div><div class="frame frame-x frame-right"></div><div class="frame frame-bottom"></div>'
+
+
+
+framer.options = {};
+framer.options.frames = [];
+framer.options.mattes = [];
+
+
+framer.selectedOptions = {
+  size: {},
+  frame: {},
+  matte: {}
+}
+
+
+
+
+framer.updateFormSelection = function(clickedOption){
+
+
+let { id, title, type, frameimage, framewidth, mattewidth } = clickedOption.target.dataset; // destructuring
+
+
+// update framerSelectedOptions object
+framer.selectedOptions[type].title = title;
+framer.selectedOptions[type].id = id;
+
+if(clickedOption.target.dataset.hasOwnProperty("frameimage")){ // i.e. if is a frame thats clicked on...
+  framer.selectedOptions.frame.frameimage = frameimage;
+  framer.selectedOptions.frame.framewidth = framewidth;
+  framer.selectedOptions.matte.mattewidth = mattewidth;
+
+}
+
+
+
+//update selection text
+$('#' + type + '-button-span').text(title);
+
+// advance to next option size > frame > matte
+
+// when frame selected:
+if(framer.selectedOptions.frame.id != undefined){
+  $(`input[class="mattes"]`).prop('checked', null)
+  $(`input[value="${framer.selectedOptions.frame.id}"]`).prop('checked', 'checked')
+  framer.getMatteOptions();
+}
+// when matte selected
+if(framer.selectedOptions.matte.id != undefined){
+   $(`input[class="mattes"]`).prop('checked', null);
+   $(`input[value="${framer.selectedOptions.matte.id}"]`).prop('checked', 'checked')
+  $('#options').hide();
+  $('#mainProductContainer').fadeIn(1000);
+
+  this.renderFrame()
+
+}
+
+//
+}
+
+
+
+framer.displayOptions = function(option){
+  let frameWidthRegex = /(frame-width-.)/i;
+  let matteWidthRegex = /(matte-width-.)/i;
+let html = "";
+if(framer.options[option].length > 1){
+  html += "<div class='grid'>"
+  framer.options[option].forEach(x => {
+
+    html += "<div class='grid__item medium-up--one-quarter'>"
+    html += "<img data-id='" + x.variants[0].id + "' data-title='" + x.title + "'" + " data-type='" + x.product_type.toLowerCase() + "' "
+
+    // frames
+    if(x.images[1]) {
+      html += "data-frameimage='" + x.images[1].src + "' "
+    }
+
+    if(x.tags.length > 0) {
+
+        x.tags.forEach(tag => {
+          if(frameWidthRegex.test(tag)){
+
+            html += "data-framewidth='" + tag + "' "
+          }
+          if(matteWidthRegex.test(tag)){
+
+            html += "data-mattewidth='" + tag + "' "
+          }
+        })
+    }
+    html += "class='frame-option option' src='" + x.images[0].src + "' />"
+    html += "<p>" + x.title + "</p>"
+    html += "<p>" + "$80.00" + "</p>"
+    html += "</div>"
+  })
+  html += "</div>"
+}
+  $('#options').html(html);
+  $('#mainProductContainer').hide();
+  $('#options').show();
+
+//assign click handlers - refactor this
+  $('.option').on('click', function(e){
+
+    //this.renderFrame(e.target.dataset) // pass renderFrame function the name of frame clicked on.
+    framer.updateFormSelection(e)
+  })
+};
+
+
+
+
+
+
+
+framer.getSizeOptions= function(){
+  if(framer.options.frames.length < 1){
+    $.getJSON('/collections/frames/products.json', function(obj){
+
+      obj.products.forEach(x => {
+        framer.options.frames.push(x)
+      })
+  }).done( function(){
+    framer.displayOptions("sizes");
+
+  }
+  )
+  }
+
+};
+
+framer.getFrameOptions= function(){
+  if(framer.options.frames.length < 1){
+    $.getJSON('/collections/frames/products.json', function(obj){
+
+      obj.products.forEach(x => {
+        framer.options.frames.push(x)
+      })
+  }).done( function(){
+    framer.displayOptions("frames");
+  }
+  )
+  }
+else {
+  framer.displayOptions("frames");
+}
+};
+
+framer.getMatteOptions= function(){
+
+  if(framer.options.mattes.length < 1){
+    $.getJSON('/collections/mattes/products.json', function(obj){
+
+      obj.products.forEach(x => {
+        framer.options.mattes.push(x)
+      })
+  }).done( function(){
+    framer.displayOptions("mattes");
+
+  }
+  )
+  }else {
+    framer.displayOptions("mattes");
+  }
+
+};
+
+
+
+framer.renderFrame = function(){
+
+
+  //change background images for frame elements
+  $('.frame').css('background-image', "url(" + this.selectedOptions.frame.frameimage + ")");
+
+//change widths for frame elements
+  framer.frameEdges.forEach(edge => {
+
+    // see framer v1.0 to reset width when changed...
+    let frameWidthRegex = /(frame-width-.)/i;
+  edge.classList.value = edge.classList.value.replace(frameWidthRegex, "");
+
+
+    $(edge).addClass(this.selectedOptions.frame.framewidth)
+  })
+
+// check if matte selected,
+// if matte selected:
+if(this.selectedOptions.matte.title === "No Matte") {
+
+} else {
+  $('#image-sub-container').css("background-color", "white")
+// extends the max-width slightly to accomodate extra matte padding / frame
+  $('#main-image-container').addClass("with-frame")
+}
+
+// change padding width
+
+  // if so, add it to container
+  // change amount of padding to container
+  let matteWidthRegex = /(matte-width-.)/i;
+let imageSubContainer = document.querySelector('#image-sub-container');
+
+  imageSubContainer.classList.value = imageSubContainer.classList.value.replace(matteWidthRegex, "");
+console.log("added mattewidth class...");
+console.log(this.selectedOptions.matte.mattewidth);
+  $('#image-sub-container').addClass(this.selectedOptions.matte.mattewidth)
+}
+
+
+
+
+framer.init = function(){
+
+$('.container').append(this.frameElements)
+framer.frameEdges = $(".frame").toArray();
+  $('#options').hide();
+  // bind event handlers
+
+
+
+$('button[name="getSizes"]').on('click', ()=>{
+framer.getSizeOptions();
+})
+
+$('button[name="getFrames"]').on('click', ()=>{
+framer.getFrameOptions();
+})
+
+$('button[name="getMattes"]').on('click', ()=>{
+framer.getMatteOptions();
+})
+
+}
+
+framer.init()
+
+</script>

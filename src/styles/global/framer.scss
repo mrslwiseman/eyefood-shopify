@@ -1,0 +1,107 @@
+/* ==================================================*/
+/*  FRAMER */
+/* ==================================================*/
+
+$matte1color: red;
+$matte2color: grey;
+
+
+#main-image-container {
+  max-width: 400px;
+  display: inline-table;
+  overflow: hidden; }
+
+
+#image-sub-container {
+
+  text-align: center;
+  display: inline-block;
+
+  position: relative; }
+
+#main-image {
+  width: 100%; }
+
+.with-frame {
+  // class is added to extend max-width of #main-image-container
+  max-width:500px !important;
+}
+
+.frame {
+  display: block;
+  position: absolute;
+  background-size: 100% 100%; }
+
+.frame-x {
+  height: 100%;
+  z-index: 10;
+  top: 0; }
+
+.frame-top {
+  top: 0;
+  right: -100px;
+  height: 580px;
+  transform: rotate(90deg);
+  transform-origin: 0% 0%;
+ }
+
+.frame-right {
+  transform: rotate(180deg);
+  right: 0; }
+
+.frame-bottom {
+  left: 550px;
+  bottom: 0;
+  height: 580px;
+  transform: rotate(-90deg);
+  transform-origin: 0% 100%; }
+
+.frame-left {
+  left: 0; }
+
+.frame-width-1 {
+  width: 5%;
+  -webkit-clip-path: polygon(0 0, 100% 9%, 100% 91%, 0 100%);
+  clip-path: polygon(0 0, 100% 9%, 100% 91%, 0 100%);
+  clip-path: url("#frame-width-1"); }
+
+.frame-width-2 {
+  width: 6.5%;
+  -webkit-clip-path: polygon(0 0, 100% 9%, 100% 91%, 0 100%);
+  clip-path: polygon(0 0, 100% 9%, 100% 91%, 0 100%);
+  clip-path: url("#frame-width-2"); }
+
+.frame-width-3 {
+  width: 6.5%;
+  -webkit-clip-path: polygon(0 0, 100% 9%, 100% 91%, 0 100%);
+  clip-path: polygon(0 0, 100% 9%, 100% 91%, 0 100%);
+  clip-path: url("#frame-width-3"); }
+
+.frame-width-4 {
+  width: 10%;
+  -webkit-clip-path: polygon(0 0, 100% 15%, 100% 85%, 0 100%);
+  clip-path: polygon(0 0, 100% 15%, 100% 85%, 0 100%);
+  clip-path: url("#frame-width-4"); }
+
+.matte-width-0 {
+  padding: 0 !important;
+ }
+.matte-width-1 {
+  padding: 20% !important;
+ }
+.matte-width-2 {
+  padding: 20% !important;
+ }
+.matte-width-3 {
+  padding: 20% !important;
+ }
+.matte-width-4 {
+  padding: 25% !important;
+ }
+
+/*# sourceMappingURL=style.css.map */
+
+
+.clip-svg {
+position: absolute;
+}
